@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-UNAME="mike"
-USHELL="/bin/bash"
+source "$(dirname "$0")/wsl-systemd-env"
 
-SYSTEMD_PID=$(pgrep -f -a "^/lib/systemd/systemd --system-unit=basic.target" | awk '{ print $1 }')
+SYSTEMD_PID=$(wsl-systemd-get-pid)
 
 if [ -n "$SYSTEMD_PID" ] && [ "$SYSTEMD_PID" != "1" ]; then
-  # exec sudo /usr/bin/nsenter -t "$SYSTEMD_PID" -a su - "$LOGNAME"
-  exec sudo /usr/bin/nsenter \
+  exec /usr/bin/nsenter \
     -t "$SYSTEMD_PID" \
     -a \
       runuser \
       -l \
-      -s "$USHELL" \
-      "$UNAME"
-  # exec nsenter -t "${SYSTEMD_PID}" -m -p --wd="${PWD}" runuser -s "${USHELL}" "${UNAME}" -- "${@}"
+      -s "$WSL_SYSTEMD_SHELL" \
+      "$WSL_SYSTEMD_USER"
 fi

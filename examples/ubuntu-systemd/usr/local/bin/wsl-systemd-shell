@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# Do anythin extra here:
-wsl.exe -d Debian -- bash -l -c ls
+# Shared mounts need to be mounted before systemd starts.
+# Also it seems the systemd environment doesn't pick up on any new mounts.
+wsl.exe -d Debian -- bash -l -c true
+
+source "$(dirname "$0")/wsl-systemd-env"
 
 sudo /usr/local/bin/wsl-systemd-start
 # exec sudo /usr/local/bin/wsl-systemd-nsenter
-exec bash -l
+exec "$WSL_SYSTEMD_SHELL" -l

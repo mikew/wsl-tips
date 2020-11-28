@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-SYSTEMD_PID=$(pgrep -f -a "^/lib/systemd/systemd --system-unit=basic.target" | awk '{ print $1 }')
+source "$(dirname "$0")/wsl-systemd-env"
+
+SYSTEMD_PID=$(get-systemd-pid)
 
 if [ -z "$SYSTEMD_PID" ]; then
-  sudo /usr/bin/daemonize \
+  /usr/bin/daemonize \
     /usr/bin/unshare \
       --fork \
       --pid \
       --mount-proc \
       /lib/systemd/systemd \
         --system-unit=basic.target
-  # SYSTEMD_PID=$(pgrep -f -a "^/lib/systemd/systemd --system-unit=basic.target" | awk '{ print $1 }')
 fi
