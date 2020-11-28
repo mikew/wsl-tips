@@ -5,14 +5,14 @@ LOCAL_PATH="/opt/shared"
 SHARE_PATH="/mnt/wsl/shared"
 
 if [ ! -d "$LOCAL_PATH" ]; then
-    mkdir -p "$LOCAL_PATH"
+  mkdir -p "$LOCAL_PATH"
 fi
 
 if [ ! -d "$SHARE_PATH" ]; then
-    mkdir -p "$SHARE_PATH"
+  mkdir -p "$SHARE_PATH"
 fi
 
 # If mount point directory is not mounted upon, bind mount fs.
 if ! mountpoint -q -- "$SHARE_PATH"; then
-    mount --bind "$LOCAL_PATH" "$SHARE_PATH"
+  mount --bind "$LOCAL_PATH" "$SHARE_PATH"
 fi
