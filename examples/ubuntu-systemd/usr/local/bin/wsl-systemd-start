@@ -3,7 +3,7 @@ set -e
 
 source "$(dirname "$0")/wsl-systemd-env"
 
-SYSTEMD_PID=$(get-systemd-pid)
+SYSTEMD_PID=$(wsl-systemd-get-pid)
 
 if [ -z "$SYSTEMD_PID" ]; then
   /usr/bin/daemonize \
