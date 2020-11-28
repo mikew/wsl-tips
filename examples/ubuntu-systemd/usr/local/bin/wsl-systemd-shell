@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Do anythin extra here:
+wsl.exe -d Debian -- bash -l -c ls
+
+sudo /usr/local/bin/wsl-systemd-start
+# exec sudo /usr/local/bin/wsl-systemd-nsenter
+exec bash -l
