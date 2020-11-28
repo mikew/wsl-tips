@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -ex
 
-LOCAL_PATH="/home/mike"
+LOCAL_PATH="/opt/shared"
 SHARE_PATH="/mnt/wsl/shared"
 
-# If mount point directory does not exist, create it.
+if [ ! -d "$LOCAL_PATH" ]; then
+    mkdir -p "$LOCAL_PATH"
+fi
+
 if [ ! -d "$SHARE_PATH" ]; then
     mkdir -p "$SHARE_PATH"
 fi

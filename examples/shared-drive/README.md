@@ -11,8 +11,8 @@ To share a drive on WSL, you need:
 On the distribution that will do the sharing:
 
 ```sh
-cp ./usr/local/bin/wsl-bind-mount /usr/local/bin/
-sudo cp ./etc/sudoers.d/wsl-bind-mount /etc/sudoers.d/
+sudo cp ./usr/local/bin/* /usr/local/bin/
+sudo cp ./etc/sudoers.d/* /etc/sudoers.d/
 
 # Call wsl-bind-mount when the distribution starts. This is an example.
 echo "sudo /usr/local/bin/wsl-bind-mount" > ~/.bashrc
