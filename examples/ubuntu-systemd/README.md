@@ -9,3 +9,9 @@ sudo cp ./etc/sudoers.d/* /etc/sudoers.d/
 ```
 
 Change your users shell to `/usr/local/bin/wsl-systemd-shell`
+
+## Notes
+
+When inside the systemd namespace, WSLs `.exe` integration seems to break,
+and I'm sure other things do as well. For that reason, this shell doesn't run
+`nsenter` automatically.
