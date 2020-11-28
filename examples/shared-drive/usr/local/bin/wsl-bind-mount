@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 LOCAL_PATH="/opt/shared"
 SHARE_PATH="/mnt/wsl/shared"
