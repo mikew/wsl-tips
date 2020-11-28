@@ -5,12 +5,15 @@ source "$(dirname "$0")/wsl-systemd-env"
 
 SYSTEMD_PID=$(wsl-systemd-get-pid)
 
+if [ -z "$1" ]; then
+  NSENTER_CMD=(runuser -l -s "$WSL_SYSTEMD_SHELL" "$WSL_SYSTEMD_USER")
+else
+  NSENTER_CMD=(sudo -u "$WSL_SYSTEMD_USER" "$@")
+fi
+
 if [ -n "$SYSTEMD_PID" ] && [ "$SYSTEMD_PID" != "1" ]; then
   exec /usr/bin/nsenter \
     -t "$SYSTEMD_PID" \
     -a \
-      runuser \
-      -l \
-      -s "$WSL_SYSTEMD_SHELL" \
-      "$WSL_SYSTEMD_USER"
+    "${NSENTER_CMD[@]}"
 fi
