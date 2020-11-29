@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-export WSL_SYSTEMD_USER="mike"
-export WSL_SYSTEMD_SHELL="/bin/bash"
-
 wsl-systemd-get-pid() {
-  pgrep -xo systemd
+  pgrep -xo systemd || true
 }
