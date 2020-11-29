@@ -21,5 +21,5 @@ echo "sudo /usr/local/bin/wsl-bind-mount" > ~/.bashrc
 Then, on any distribution you want to mount this on, you can add this to your shells profile:
 
 ```sh
-wsl.exe -d Debian -- bash -l -c ls
+wsl.exe -d Debian -- bash -l -c true
 ```
