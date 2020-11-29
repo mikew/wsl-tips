@@ -6,9 +6,9 @@ Change `WSL_SYSTEMD_SHELL` and `WSL_SYSTEMD_USER` in `usr/local/bin/wsl-systemd-
 sudo apt update && sudo apt install -y fontconfig daemonize
 sudo cp ./usr/local/bin/* /usr/local/bin/
 sudo cp ./etc/sudoers.d/* /etc/sudoers.d/
+sudo cp ./etc/profile.d/* /etc/profile.d/
 ```
 
-Change your users shell to `/usr/local/bin/wsl-systemd-shell`
 
 ## Notes
 
