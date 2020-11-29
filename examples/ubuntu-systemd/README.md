@@ -9,6 +9,9 @@ sudo cp ./etc/sudoers.d/* /etc/sudoers.d/
 sudo cp ./etc/profile.d/* /etc/profile.d/
 ```
 
+Use `wsl-systemd-nsenter` to enter the systemd namespace. From here you'll be able to start and stop services, and interact with things like `snap`.
+
+Commands like `wsl-systemd-nsenter snap run code` also work.
 
 ## Notes
 

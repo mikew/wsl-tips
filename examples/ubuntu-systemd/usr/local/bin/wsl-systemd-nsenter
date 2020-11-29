@@ -3,18 +3,23 @@ set -e
 
 source "$(dirname "$0")/wsl-systemd-env"
 
-SYSTEMD_PID=$(wsl-systemd-get-pid)
-
 if [ -z "$1" ]; then
-  NSENTER_CMD=(runuser -l -s "$WSL_SYSTEMD_SHELL" "$WSL_SYSTEMD_USER")
+  NSENTER_CMD=(su -l -s "$SHELL" "$USER")
 else
   CMD="$1"
   shift
-  NSENTER_CMD=(runuser "$WSL_SYSTEMD_USER" -s "$(which "$CMD")" -- "$@")
+  NSENTER_CMD=(su "$USER" -s "$(which "$CMD")" -- "$@")
 fi
 
-if [ -n "$SYSTEMD_PID" ] && [ "$SYSTEMD_PID" != "1" ]; then
-  exec /usr/bin/nsenter \
+SYSTEMD_PID=$(wsl-systemd-get-pid)
+
+if [ -z "$SYSTEMD_PID" ]; then
+  echo "systemd is not running."
+  exit 1
+fi
+
+if [ "$SYSTEMD_PID" != "1" ]; then
+  exec sudo -E -H /usr/bin/nsenter \
     -t "$SYSTEMD_PID" \
     -a \
     "${NSENTER_CMD[@]}"

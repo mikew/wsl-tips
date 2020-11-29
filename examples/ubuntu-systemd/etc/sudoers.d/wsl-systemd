@@ -1,2 +1,1 @@
 %sudo ALL=(ALL) NOPASSWD: /usr/local/bin/wsl-systemd-start
-%sudo ALL=(ALL) NOPASSWD: /usr/local/bin/wsl-systemd-nsenter
